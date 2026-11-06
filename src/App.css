@@ -21,13 +21,34 @@
   margin-top: 0;
 }
 
+.sidebar h2 {
+  font-size: 18px;
+  margin: 12px 0 4px;
+}
+
 .stop-list {
   margin: 0;
   padding-left: 20px;
 }
 
 .stop-list li {
-  margin-bottom: 12px;
+  margin-bottom: 4px;
+}
+
+.stop-button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.stop-button:hover {
+  background: #f3f4f6;
 }
 
 .stop-name {
@@ -37,6 +58,55 @@
 
 .stop-meta {
   font-size: 14px;
+  color: #666;
+}
+
+.back-button {
+  padding: 4px 0;
+  border: none;
+  background: none;
+  color: #2563eb;
+  font: inherit;
+  cursor: pointer;
+}
+
+.arrival-list {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.arrival {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.route-badge {
+  min-width: 40px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #1e3a8a;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+}
+
+.arrival-headsign {
+  flex: 1;
+}
+
+.arrival-time {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-weight: 600;
+}
+
+.arrival-time small {
+  font-weight: 400;
   color: #666;
 }
 

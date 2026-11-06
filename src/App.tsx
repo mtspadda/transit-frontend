@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { findNearbyStops } from './stops/api'
+import { StopArrivals } from './stops/StopArrivals'
 import { StopList } from './stops/StopList'
 import { StopMap } from './stops/StopMap'
 import type { NearbyStop, Point } from './stops/types'
@@ -11,6 +12,7 @@ const RADIUS_METERS = 500
 export default function App() {
   const [center, setCenter] = useState<Point>(SPIRE)
   const [stops, setStops] = useState<NearbyStop[]>([])
+  const [selectedStop, setSelectedStop] = useState<NearbyStop | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -34,25 +36,38 @@ export default function App() {
   }, [center])
 
   function handleMapClick(point: Point) {
-    setCenter(point)
-    setLoading(true)
-    setError(null)
-  }
+      setCenter(point)
+      setSelectedStop(null)
+      setLoading(true)
+      setError(null)
+    }
 
-  return (
-    <div className="layout">
-      <StopMap
-        center={center}
-        radius={RADIUS_METERS}
-        stops={stops}
-        onMapClick={handleMapClick}
-      />
-      <aside className="sidebar">
-        <h1>Paradas próximas</h1>
-        {loading && <p>Carregando...</p>}
-        {error && <p className="error">Erro: {error}</p>}
-        {!loading && !error && <StopList stops={stops} />}
-      </aside>
-    </div>
-  )
-}
+    return (
+      <div className="layout">
+        <StopMap
+          center={center}
+          radius={RADIUS_METERS}
+          stops={stops}
+          selectedStopId={selectedStop?.id ?? null}
+          onMapClick={handleMapClick}
+          onStopClick={setSelectedStop}
+        />
+        <aside className="sidebar">
+          {selectedStop ? (
+            <StopArrivals
+              key={selectedStop.id}
+              stop={selectedStop}
+              onBack={() => setSelectedStop(null)}
+            />
+          ) : (
+            <>
+              <h1>Paradas próximas</h1>
+              {loading && <p>Carregando...</p>}
+              {error && <p className="error">Erro: {error}</p>}
+              {!loading && !error && <StopList stops={stops} onSelect={setSelectedStop} />}
+            </>
+          )}
+        </aside>
+      </div>
+    )
+  }
