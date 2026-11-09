@@ -16,7 +16,7 @@ export function StopList({ stops, onSelect }: StopListProps) {
           <button type="button" className="stop-button" onClick={() => onSelect(stop)}>
             <span className="stop-name">{stop.name}</span>
             <span className="stop-meta">
-              {stop.code && `Parada ${stop.code} · `}
+              {stop.code && `Stop ${stop.code} · `}
               {stop.distanceMeters} m
             </span>
           </button>

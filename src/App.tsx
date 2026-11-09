@@ -61,8 +61,8 @@ export default function App() {
             />
           ) : (
             <>
-              <h1>Paradas próximas</h1>
-              {loading && <p>Carregando...</p>}
+              <h1>Next stops</h1>
+              {loading && <p>Loading...</p>}
               {error && <p className="error">Erro: {error}</p>}
               {!loading && !error && <StopList stops={stops} onSelect={setSelectedStop} />}
             </>

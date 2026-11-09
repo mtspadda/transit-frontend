@@ -45,13 +45,13 @@ export function StopArrivals({ stop, onBack}: StopArrivalsProps ) {
       </button>
 
       <h2>{stop.name}</h2>
-      {stop.code && <p className="stop-meta">Parada {stop.code}</p>}
+      {stop.code && <p className="stop-meta">Stop {stop.code}</p>}
 
-      {loading && <p>Carregando...</p>}
-      {error && <p className="error">Erro: {error}</p>}
+      {loading && <p>Loading...</p>}
+      {error && <p className="error">Error: {error}</p>}
 
       {!loading && !error && arrivals.length === 0 && (
-        <p>Nenhum ônibus programado na próxima hora.</p>
+        <p>No bus for the next hour.</p>
       )}
 
       {!loading && !error && arrivals.length > 0 && (
@@ -59,9 +59,9 @@ export function StopArrivals({ stop, onBack}: StopArrivalsProps ) {
           {arrivals.map((arrival) => (
             <li key={`${arrival.tripId}-${arrival.scheduledAt}`} className="arrival">
               <span className="route-badge">{arrival.route ?? '?'}</span>
-              <span className="arrival-headsign">{arrival.headsign ?? 'Destino não informado'}</span>
+              <span className="arrival-headsign">{arrival.headsign ?? 'No destiny'}</span>
               <span className="arrival-time">
-                {arrival.minutesAway <= 0 ? 'agora' : `${arrival.minutesAway} min`}
+                {arrival.minutesAway <= 0 ? 'Due now' : `${arrival.minutesAway} min`}
                 <small>{timeFormat.format(new Date(arrival.scheduledAt))}</small>
               </span>
             </li>
