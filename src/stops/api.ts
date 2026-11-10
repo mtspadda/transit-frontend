@@ -22,7 +22,7 @@ export async function findNearbyStops(
   return response.json()
 }
 
-export async function findArrival(stopId: string, minutes = 60): Promise<Arrival[]>{
+export async function findArrivals(stopId: string, minutes = 60): Promise<Arrival[]>{
   const params = new URLSearchParams({ minutes: String(minutes) })
   const response = await fetch(`/api/stops/${encodeURIComponent(stopId)}/arrivals?${params}`)
 

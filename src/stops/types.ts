@@ -12,10 +12,15 @@ export interface Point {
   lon: number
 }
 
+export type ArrivalStatus = 'SCHEDULED' | 'REALTIME' | 'CANCELED' | 'SKIPPED'
+
 export interface Arrival {
   tripId: string
   route: string | null
   headsign: string | null
   scheduledAt: string
+  expectedAt: string | null
+  delaySeconds: number | null
+  status: ArrivalStatus
   minutesAway: number
 }

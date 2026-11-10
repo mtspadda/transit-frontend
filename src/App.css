@@ -130,3 +130,19 @@
     border-top: 1px solid #ddd;
   }
 }
+
+.arrival.live .arrival-time small {
+  color: #16a34a;
+}
+
+.arrival.late .arrival-time small {
+  color: #dc2626;
+}
+
+.arrival.canceled {
+  opacity: 0.6;
+}
+
+.arrival.canceled .arrival-headsign {
+  text-decoration: line-through;
+}
