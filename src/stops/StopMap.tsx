@@ -1,5 +1,13 @@
 import { Circle, CircleMarker, MapContainer, TileLayer, Tooltip, useMapEvents } from 'react-leaflet'
-import type { NearbyStop, Point } from './types'
+import type { NearbyStop, Point, TransportType } from './types'
+
+const STOP_COLORS: Record<TransportType, string> = {
+  LUAS_RED: '#e4002b',
+  LUAS_GREEN: '#00a650',
+  TRAM: '#7c3aed',
+  RAIL: '#2563eb',
+  BUS: '#f5b800',
+}
 
 interface StopMapProps {
   center: Point
@@ -36,8 +44,10 @@ export function StopMap({ center, radius, stops, selectedStopId, onMapClick, onS
             bubblingMouseEvents={false}
             eventHandlers={{ click: () => onStopClick(stop) }}
             pathOptions={{
-              color: selected ? '#16a34a' : '#dc2626',
-              fillOpacity: 0.8,
+              color: selected ? '#111827' : STOP_COLORS[stop.transportType],
+              weight: selected ? 3 : 1,
+              fillColor: STOP_COLORS[stop.transportType],
+              fillOpacity: 0.9,
             }}
           >
             <Tooltip>{stop.name}</Tooltip>

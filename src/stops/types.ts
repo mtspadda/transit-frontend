@@ -1,3 +1,8 @@
+
+export type ArrivalStatus = 'SCHEDULED' | 'REALTIME' | 'CANCELED' | 'SKIPPED'
+
+export type TransportType = 'BUS' | 'RAIL' | 'TRAM' | 'LUAS_RED' | 'LUAS_GREEN'
+
 export interface NearbyStop {
   id: string
   code: string | null
@@ -5,14 +10,13 @@ export interface NearbyStop {
   lat: number
   lon: number
   distanceMeters: number
+  transportType: TransportType
 }
 
 export interface Point {
   lat: number,
   lon: number
 }
-
-export type ArrivalStatus = 'SCHEDULED' | 'REALTIME' | 'CANCELED' | 'SKIPPED'
 
 export interface Arrival {
   tripId: string

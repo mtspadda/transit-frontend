@@ -15,6 +15,17 @@ const timeFormat = new Intl.DateTimeFormat('en-IE', {
   timeZone: 'Europe/Dublin',
 })
 
+function routeBadgeClass(route: string | null): string {
+  switch (route?.toLowerCase()) {
+    case 'green':
+      return 'route-badge luas-green'
+    case 'red':
+      return 'route-badge luas-red'
+    default:
+      return 'route-badge bus'
+  }
+}
+
 function describe(arrival: Arrival): { main: string; detail: string; className: string } {
   const time = timeFormat.format(new Date(arrival.expectedAt ?? arrival.scheduledAt))
   const minutes = arrival.minutesAway <= 0 ? 'Due now' : `${arrival.minutesAway} min`
@@ -94,7 +105,7 @@ export function StopArrivals({ stop, onBack }: StopArrivalsProps) {
             const { main, detail, className } = describe(arrival)
             return (
               <li key={`${arrival.tripId}-${arrival.scheduledAt}`} className={`arrival ${className}`}>
-                <span className="route-badge">{arrival.route ?? '?'}</span>
+                <span className={routeBadgeClass(arrival.route)}>{arrival.route ?? '?'}</span>
                 <span className="arrival-headsign">{arrival.headsign ?? 'Destiny not informed'}</span>
                 <span className="arrival-time">
                   {main}
