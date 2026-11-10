@@ -146,3 +146,16 @@
 .arrival.canceled .arrival-headsign {
   text-decoration: line-through;
 }
+
+.route-badge.luas-green {
+  background: #00a650;
+}
+
+.route-badge.luas-red {
+  background: #e4002b;
+}
+
+.route-badge.bus {
+  background: #f5b800;
+  color: #111827;
+}
