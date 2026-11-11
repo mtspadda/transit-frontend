@@ -1,5 +1,6 @@
-import { Circle, CircleMarker, MapContainer, TileLayer, Tooltip, useMapEvents } from 'react-leaflet'
+import { Circle, CircleMarker, MapContainer, TileLayer, Tooltip, useMap, useMapEvents } from 'react-leaflet'
 import type { NearbyStop, Point, TransportType } from './types'
+import { useEffect } from 'react'
 
 const STOP_COLORS: Record<TransportType, string> = {
   LUAS_RED: '#e4002b',
@@ -27,7 +28,7 @@ export function StopMap({ center, radius, stops, selectedStopId, onMapClick, onS
       />
 
       <ClickHandler onMapClick={onMapClick} />
-
+      <FollowCenter center={center} />
       <Circle
         center={[center.lat, center.lon]}
         radius={radius}
@@ -64,5 +65,15 @@ function ClickHandler({ onMapClick }: { onMapClick: (point: Point) => void }) {
       onMapClick({ lat: event.latlng.lat, lon: event.latlng.lng })
     },
   })
+  return null
+}
+
+function FollowCenter({ center }: { center: Point }) {
+  const map = useMap()
+
+  useEffect(() => {
+    map.panTo([center.lat, center.lon])
+  }, [map, center])
+
   return null
 }

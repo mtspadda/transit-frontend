@@ -7,7 +7,7 @@ import type { NearbyStop, Point } from './stops/types'
 import './App.css'
 
 const SPIRE: Point = { lat: 53.3498, lon: -6.2603 }
-const RADIUS_METERS = 500
+const RADIUS_METERS = 500 
 
 export default function App() {
   const [center, setCenter] = useState<Point>(SPIRE)
@@ -15,6 +15,26 @@ export default function App() {
   const [selectedStop, setSelectedStop] = useState<NearbyStop | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!('geolocation' in navigator)) {
+      return   // navegador sem suporte: fica no Spire
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setCenter({ lat: position.coords.latitude, lon: position.coords.longitude })
+        setSelectedStop(null)
+        setLoading(true)
+        setError(null)
+      },
+      (error) => {
+        console.warn('Geolocation unavailable:', error.message)
+      },
+      { enableHighAccuracy: true, timeout: 10_000, maximumAge: 60_000 },
+    )
+  }, [])
+
 
   useEffect(() => {
     let ignore = false
